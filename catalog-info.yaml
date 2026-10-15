@@ -1,0 +1,83 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rhdh-test
+  description: Quarkus golden-path backend with Jenkins, Helm, and OpenAPI
+  tags:
+    - quarkus
+    - java
+    - golden-path
+    - jenkins
+    - helm
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/source-location: url:https://github.com/alan/rhdh-test/tree/main/
+    backstage.io/view-url: https://github.com/alan/rhdh-test
+    backstage.io/edit-url: https://github.com/alan/rhdh-test/edit/main/catalog-info.yaml
+    github.com/project-slug: alan/rhdh-test
+    jenkins.io/job-full-name: demo/rhdh-test
+    sonarqube.org/project-key: rhdh-test
+    argocd/app-name: rhdh-test
+    argocd/app-namespace: openshift-gitops
+    backstage.io/kubernetes-id: rhdh-test
+    backstage.io/kubernetes-namespace: demo-dev
+    vault.io/secrets-path: rhdh
+    jira/project-key: DEMO
+    jira/component: rhdh-test
+    snyk.io/org-id: stub-org
+    snyk.io/org-name: stub-org
+    snyk.io/project-ids: stub
+    servicenow.com/entity-id: demo
+    jfrog-artifactory/image-name: rhdh-test
+    dynatrace.com/dynatrace-entity-id: SERVICE-DEMO
+    acme.io/devfile-path: devfile.yaml
+    acme.io/helm-chart: chart
+    acme.io/mesh: ambient
+    acme.io/mesh-ingress: gateway
+    acme.io/devspaces-url: https://devspaces.devspaces.ocp.dkccw.sandbox3257.opentlc.com
+    acme.io/devspaces-factory-url: https://devspaces.devspaces.ocp.dkccw.sandbox3257.opentlc.com#https://github.com/alan/rhdh-test?new&devfilePath=devfile.yaml
+  links:
+    - url: https://github.com/alan/rhdh-test/tree/main/chart
+      title: Helm chart
+      icon: github
+    - url: https://github.com/alan/rhdh-test/blob/main/Jenkinsfile
+      title: Jenkinsfile
+      icon: github
+    - url: https://jenkins-jenkins.apps.rosa.rosa-89s85.bhg0.p3.openshiftapps.com/job/demo/job/rhdh-test/
+      title: Jenkins CI
+      icon: dashboard
+    - url: https://github.com/alan/rhdh-test/blob/main/openapi.yaml
+      title: OpenAPI
+      icon: github
+spec:
+  type: service
+  lifecycle: experimental
+  owner: user:default/guest
+  system: acme-demo
+  providesApis:
+    - rhdh-test-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: rhdh-test-api
+  description: OpenAPI for rhdh-test
+  tags:
+    - quarkus
+    - openapi
+spec:
+  type: openapi
+  lifecycle: experimental
+  owner: user:default/guest
+  system: acme-demo
+  definition:
+    $text: ./openapi.yaml
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: acme-demo
+  description: Demo product (website + backend)
+spec:
+  owner: user:default/guest
